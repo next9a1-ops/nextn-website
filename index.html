@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXTN | 넥스트엔 - 게임 및 소프트웨어 개발</title>
+<meta name="description" content="주식회사 넥스트엔(NEXTN Co., Ltd.)은 모바일 게임과 소프트웨어를 개발하는 전문 기업입니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0d17; --bg2:#12152a; --card:#171b34; --line:#262b4d;
+    --text:#eef0ff; --muted:#a3a8cc; --accent:#6c5cff; --accent2:#22d3ee;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  header{position:sticky;top:0;z-index:10;background:rgba(11,13,23,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;letter-spacing:.06em}
+  .logo svg{width:34px;height:34px}
+  nav a{margin-left:28px;font-size:15px;color:var(--muted);transition:color .2s}
+  nav a:hover{color:var(--text)}
+
+  .hero{padding:120px 0 110px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:-40% -10% auto auto;width:720px;height:720px;
+    background:radial-gradient(circle,rgba(108,92,255,.35),transparent 65%);pointer-events:none}
+  .hero::after{content:"";position:absolute;left:-200px;bottom:-300px;width:600px;height:600px;
+    background:radial-gradient(circle,rgba(34,211,238,.18),transparent 65%);pointer-events:none}
+  .eyebrow{display:inline-block;font-size:13px;letter-spacing:.2em;color:var(--accent2);font-weight:700;margin-bottom:20px}
+  .hero h1{font-size:clamp(34px,5.4vw,62px);line-height:1.2;font-weight:900;letter-spacing:-.02em}
+  .hero h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{margin-top:24px;max-width:600px;color:var(--muted);font-size:18px}
+  .btns{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
+  .btn{padding:14px 28px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .2s,opacity .2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),#8b7bff);color:#fff}
+  .btn.ghost{border:1px solid var(--line);color:var(--text)}
+
+  section{padding:96px 0}
+  section.alt{background:var(--bg2)}
+  .sec-title{font-size:13px;letter-spacing:.2em;color:var(--accent2);font-weight:700}
+  h2{font-size:clamp(26px,3.4vw,38px);font-weight:900;margin:10px 0 18px;letter-spacing:-.01em}
+  .lead{color:var(--muted);max-width:720px;font-size:17px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin-top:48px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:32px;transition:border-color .2s,transform .2s}
+  .card:hover{border-color:var(--accent);transform:translateY(-4px)}
+  .icon{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:rgba(108,92,255,.15);margin-bottom:20px}
+  .icon svg{width:28px;height:28px;stroke:var(--accent2);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .card h3{font-size:20px;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:15px}
+
+  .game{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center;margin-top:48px}
+  .game-art{aspect-ratio:4/3;border-radius:24px;border:1px solid var(--line);
+    background:linear-gradient(135deg,#2a1f6b,#0f3a52);display:grid;place-items:center;position:relative;overflow:hidden}
+  .game-art .blocks{display:grid;grid-template-columns:repeat(4,56px);gap:10px;transform:rotate(-8deg)}
+  .game-art .blocks i{width:56px;height:56px;border-radius:12px;display:block;box-shadow:inset 0 -6px 0 rgba(0,0,0,.25)}
+  .tag{display:inline-block;font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;background:rgba(34,211,238,.15);color:var(--accent2);margin-bottom:14px}
+  .game h3{font-size:30px;font-weight:900;margin-bottom:12px}
+  .game p{color:var(--muted)}
+  .meta{margin-top:20px;font-size:14px;color:var(--muted)}
+  .meta b{color:var(--text);font-weight:600}
+
+  table.info{width:100%;border-collapse:collapse;margin-top:40px;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  table.info th,table.info td{text-align:left;padding:18px 24px;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+  table.info tr:last-child th,table.info tr:last-child td{border-bottom:none}
+  table.info th{width:200px;color:var(--muted);font-weight:500}
+
+  .contact{text-align:center}
+  .contact .mail{display:inline-block;margin-top:24px;font-size:22px;font-weight:700;color:var(--accent2);border-bottom:2px solid transparent}
+  .contact .mail:hover{border-color:var(--accent2)}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  footer a{color:var(--text);margin-left:18px}
+  footer .biz{line-height:1.9}
+
+  @media (max-width:760px){
+    nav a:not(:last-child){display:none}
+    .game{grid-template-columns:1fr}
+    table.info th{width:120px}
+    table.info th,table.info td{padding:14px 16px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#" class="logo" aria-label="NEXTN 홈">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6c5cff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+        <rect x="2" y="2" width="36" height="36" rx="10" fill="url(#g)"/>
+        <path d="M12 28V12l16 16V12" stroke="#fff" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      NEXTN
+    </a>
+    <nav>
+      <a href="#about">회사소개</a>
+      <a href="#business">사업분야</a>
+      <a href="#games">게임</a>
+      <a href="#company">회사정보</a>
+      <a href="#contact">문의</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">GAME &amp; SOFTWARE DEVELOPMENT</span>
+      <h1>다음 재미를 만드는 회사,<br><span>넥스트엔</span></h1>
+      <p>주식회사 넥스트엔은 모바일 게임과 소프트웨어를 기획·개발·서비스하는 전문 기업입니다. 누구나 쉽게 즐기고 오래 머무는 경험을 만듭니다.</p>
+      <div class="btns">
+        <a href="#games" class="btn primary">게임 보기</a>
+        <a href="#contact" class="btn ghost">문의하기</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="alt">
+    <div class="wrap">
+      <div class="sec-title">ABOUT</div>
+      <h2>작고 빠른 팀, 완성도 높은 결과</h2>
+      <p class="lead">넥스트엔은 2021년 설립 이후 게임과 소프트웨어 개발에 집중해 왔습니다. 기획부터 개발, 출시와 라이브 운영까지 한 팀에서 직접 수행하며, 플레이어와 고객의 피드백을 빠르게 제품에 반영합니다.</p>
+    </div>
+  </section>
+
+  <section id="business">
+    <div class="wrap">
+      <div class="sec-title">BUSINESS</div>
+      <h2>사업분야</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4"/><circle cx="15.5" cy="11" r="1"/><circle cx="18" cy="13" r="1"/></svg></div>
+          <h3>모바일 게임 개발</h3>
+          <p>캐주얼·퍼즐·방치형 RPG 등 모바일 게임을 Unity 기반으로 기획하고 개발합니다.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6M14 4l-4 16"/></svg></div>
+          <h3>소프트웨어 개발</h3>
+          <p>웹·모바일 애플리케이션과 업무용 소프트웨어를 설계·개발·납품합니다.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+          <h3>서비스 운영</h3>
+          <p>Google Play 등 글로벌 마켓 출시와 업데이트, 라이브 운영 및 고객 지원을 수행합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="games" class="alt">
+    <div class="wrap">
+      <div class="sec-title">GAMES</div>
+      <h2>게임</h2>
+      <div class="game">
+        <div class="game-art" aria-hidden="true">
+          <div class="blocks">
+            <i style="background:#ff6b8b"></i><i style="background:#ffd166"></i><i style="background:#06d6a0"></i><i style="background:#6c5cff"></i>
+            <i style="background:#22d3ee"></i><i style="background:#ff6b8b"></i><i style="background:#ffd166"></i><i style="background:#06d6a0"></i>
+            <i style="background:#6c5cff"></i><i style="background:#22d3ee"></i><i style="background:#ff6b8b"></i><i style="background:#ffd166"></i>
+          </div>
+        </div>
+        <div>
+          <span class="tag">출시 예정 · Android</span>
+          <h3>MonsterBlock</h3>
+          <p>귀여운 몬스터 블록을 맞추고 성장시키는 모바일 캐주얼 게임입니다. 간단한 조작으로 누구나 바로 즐길 수 있습니다.</p>
+          <div class="meta"><b>플랫폼</b> Google Play &nbsp;·&nbsp; <b>개발</b> NEXTN</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="company">
+    <div class="wrap">
+      <div class="sec-title">COMPANY</div>
+      <h2>회사정보</h2>
+      <table class="info">
+        <tr><th>회사명</th><td>주식회사 넥스트엔 (NEXTN Co., Ltd.)</td></tr>
+        <tr><th>대표자</th><td>전수경</td></tr>
+        <tr><th>설립일</th><td>2021년 12월 17일</td></tr>
+        <tr><th>사업자등록번호</th><td>831-81-02473</td></tr>
+        <tr><th>D-U-N-S 번호</th><td>695299100</td></tr>
+        <tr><th>사업분야</th><td>정보통신업 · 소프트웨어 개발, 제작, 판매 · 모바일 게임 개발</td></tr>
+        <tr><th>주소</th><td>경기도 부천시 소사구 호현로 483, 1102호<br><span style="color:var(--muted);font-size:14px">1102-ho, 483 Hohyeon-ro, Sosa-gu, Bucheon-si, Gyeonggi-do, Republic of Korea</span></td></tr>
+        <tr><th>이메일</th><td>next9a1@gmail.com</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="contact" class="alt contact">
+    <div class="wrap">
+      <div class="sec-title">CONTACT</div>
+      <h2>제휴 및 문의</h2>
+      <p class="lead" style="margin:0 auto">게임·소프트웨어 개발 의뢰, 제휴, 고객 문의는 아래 이메일로 보내주세요.</p>
+      <a class="mail" href="mailto:next9a1@gmail.com">next9a1@gmail.com</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="biz">
+      주식회사 넥스트엔 | 대표 전수경 | 사업자등록번호 831-81-02473<br>
+      경기도 부천시 소사구 호현로 483, 1102호 | next9a1@gmail.com<br>
+      © 2026 NEXTN Co., Ltd. All rights reserved.
+    </div>
+    <div>
+      <a href="privacy.html">개인정보처리방침</a>
+      <a href="terms.html">이용약관</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
